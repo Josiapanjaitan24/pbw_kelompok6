@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClozUp | Keranjang</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">ClozUp</div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="home.html#produk">Produk</a></li>
+      <li><a href="keranjang.html" class="active">Keranjang</a></li>
+      <li><a href="order.html">Pesanan</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Keranjang -->
+  <section class="keranjang-section">
+    <h1>Keranjang Belanja 🛍️</h1>
+    <div id="cart-container" class="cart-container"></div>
+
+    <div class="total-section">
+      <h3>Total: <span id="total-harga">Rp 0</span></h3>
+      <button class="btn-pesan" id="pesan-btn">Pesan Sekarang</button>
+    </div>
+  </section>
+
+  <script>
+    let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+    const container = document.getElementById('cart-container');
+    const totalHargaEl = document.getElementById('total-harga');
+
+    function renderKeranjang() {
+      container.innerHTML = '';
+      let total = 0;
+
+      if (keranjang.length === 0) {
+        container.innerHTML = '<p>Keranjang kamu masih kosong 🛒</p>';
+        document.getElementById('pesan-btn').disabled = true;
+        totalHargaEl.textContent = 'Rp 0';
+        return;
+      }
+
+      keranjang.forEach((item, i) => {
+        const itemTotal = item.harga * (item.jumlah || 1);
+        const checked = item.dipilih ? 'checked' : '';
+
+        container.innerHTML += `
+          <div class="cart-item">
+            <input type="checkbox" class="pilih-produk" data-index="${i}" ${checked}>
+            <img src="${item.gambar}" alt="${item.nama}">
+            <div class="cart-info">
+              <h3>${item.nama}</h3>
+              <p>Rp ${item.harga.toLocaleString('id-ID')}</p>
+              <div class="quantity-controls">
+                <button onclick="ubahJumlah(${i}, -1)">−</button>
+                <span>${item.jumlah || 1}</span>
+                <button onclick="ubahJumlah(${i}, 1)">+</button>
+              </div>
+            </div>
+            <p class="subtotal">Rp ${itemTotal.toLocaleString('id-ID')}</p>
+            <button class="btn-hapus" onclick="hapusItem(${i})">Hapus</button>
+          </div>
+        `;
+
+        if (item.dipilih) total += itemTotal;
+      });
+
+      totalHargaEl.textContent = 'Rp ' + total.toLocaleString('id-ID');
+    }
+
+    function ubahJumlah(i, delta) {
+      if (!keranjang[i].jumlah) keranjang[i].jumlah = 1;
+      keranjang[i].jumlah += delta;
+      if (keranjang[i].jumlah < 1) keranjang[i].jumlah = 1;
+      simpanKeranjang();
+    }
+
+    function hapusItem(i) {
+      keranjang.splice(i, 1);
+      simpanKeranjang();
+    }
+
+    function simpanKeranjang() {
+      localStorage.setItem('keranjang', JSON.stringify(keranjang));
+      renderKeranjang();
+    }
+
+    // Pilih produk untuk dipesan
+    container.addEventListener('change', (e) => {
+      if (e.target.classList.contains('pilih-produk')) {
+        const index = e.target.getAttribute('data-index');
+        keranjang[index].dipilih = e.target.checked;
+        simpanKeranjang();
+      }
+    });
+
+    document.getElementById('pesan-btn').addEventListener('click', () => {
+      const produkDipilih = keranjang.filter(item => item.dipilih);
+      if (produkDipilih.length === 0) {
+        alert('Pilih produk yang ingin dipesan terlebih dahulu!');
+        return;
+      }
+      localStorage.setItem('produkDipesan', JSON.stringify(produkDipilih));
+      window.location.href = 'order.html';
+    });
+
+    renderKeranjang();
+  </script>
+</body>
+</html>

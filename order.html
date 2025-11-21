@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClozUp | Form Pemesanan</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="order-page">
+  <nav class="navbar">
+    <div class="logo">ClozUp</div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="home.html#produk">Produk</a></li>
+      <li><a href="keranjang.html">Keranjang</a></li>
+      <li><a href="order.html" class="active">Pesanan</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="order-container">
+    <h2>Form Pemesanan 📝</h2>
+
+    <!-- Produk yang dipesan -->
+    <div id="produk-dipesan-container" class="produk-ringkas-list"></div>
+
+    <form id="form-pemesanan" method="POST" action="simpan_pesanan.php">
+      <input type="hidden" name="produk_dipesan" id="produk_dipesan_input">
+      <label>Nama Lengkap</label>
+      <input type="text" name="nama_lengkap" placeholder="Masukkan nama kamu" required />
+
+      <label>Alamat Lengkap</label>
+      <textarea name="alamat_lengkap" placeholder="Masukkan alamat lengkap" required></textarea>
+
+      <label>Nomor Telepon</label>
+      <input type="tel" name="nomor_telepon" placeholder="Masukkan nomor telepon" required pattern="[0-9]+" maxlength="15">
+
+      <label>Pilih Ukuran</label>
+      <select name="ukuran" required>
+        <option value="" disabled selected>Pilih ukuran</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+
+      <label>Metode Pembayaran</label>
+      <select name="metode_pembayaran" required>
+        <option value="" disabled selected>Pilih metode pembayaran</option>
+        <option value="Transfer Bank">Transfer Bank</option>
+        <option value="COD">COD (Bayar di Tempat)</option>
+        <option value="E-Wallet">E-Wallet (Dana, OVO, Gopay)</option>
+      </select>
+
+      <button type="submit">Kirim Pesanan</button>
+    </form>
+  </div>
+
+  <script>
+    // Tampilkan produk yang dipesan dari localStorage
+    const container = document.getElementById('produk-dipesan-container');
+    const produkDipesan = JSON.parse(localStorage.getItem('produkDipesan')) || [];
+
+    if (produkDipesan.length === 0) {
+      container.innerHTML = '<p>Tidak ada produk yang dipilih 😅</p>';
+    } else {
+      produkDipesan.forEach((item) => {
+        container.innerHTML += `
+          <div class="produk-ringkas">
+            <img src="${item.gambar}" alt="${item.nama}">
+            <div>
+              <h3>${item.nama}</h3>
+              <p>Rp ${item.harga.toLocaleString('id-ID')} × ${item.jumlah || 1}</p>
+            </div>
+          </div>
+        `;
+      });
+    }
+    document.getElementById("form-pemesanan").addEventListener("submit", function() {
+  const produkDipesan = localStorage.getItem("produkDipesan") || "[]";
+  document.getElementById("produk_dipesan_input").value = produkDipesan;
+});
+
+  </script>
+</body>
+</html>

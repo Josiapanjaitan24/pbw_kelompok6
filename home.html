@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClozUp | Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">ClozUp</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#produk">Produk</a></li>
+      <li><a href="keranjang.html">Keranjang</a></li>
+      <li><a href="order.html">Pesanan</a></li>
+      <li><a href="login.html" class="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home" class="home-section">
+    <div class="overlay"></div>
+    <div class="home-content">
+      <h1>Selamat Datang di ClozUp 👋</h1>
+      <p>Hai, <span id="username">User!</span></p>
+      <a href="#produk" class="btn-utama">Lihat Produk</a>
+    </div>
+  </section>
+
+  <!-- Produk Section -->
+  <section id="produk" class="produk-section">
+    <h2>Produk Pilihan</h2>
+    <p>Produk terbaik untuk gaya terbaikmu ✨</p>
+
+    <div class="produk-container">
+      <div class="produk-card">
+        <img src="kemeja navy.jpg" alt="Kemeja Navy">
+        <h3>Kemeja Navy</h3>
+        <p>Rp 180.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Kemeja Navy', 180000, 'kemeja navy.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Kemeja Navy', 180000, 'kemeja navy.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+      <div class="produk-card">
+        <img src="flanel.jpg" alt="Kemeja Flanel">
+        <h3>Kemeja Flanel</h3>
+        <p>Rp 150.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Kemeja Flanel', 150000, 'flanel.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Kemeja Flanel', 150000, 'flanel.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+      <div class="produk-card">
+        <img src="batik.jpg" alt="Batik">
+        <h3>Batik</h3>
+        <p>Rp 175.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Batik', 175000, 'batik.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Batik', 175000, 'batik.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+      <div class="produk-card">
+        <img src="blazer.jpg" alt="Batik">
+        <h3>Blazer</h3>
+        <p>Rp 200.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Blazer', 200000, 'blazer.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Blazer', 200000, 'blazer.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+      <div class="produk-card">
+        <img src="kemeja hitam.jpg" alt="Batik">
+        <h3>Kemeja Hitam</h3>
+        <p>Rp 150.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Kemeja Hitam', 150000, 'kemeja hitam.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Kemeja Hitam', 150000, 'kemeja hitam.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+      <div class="produk-card">
+        <img src="kaos hitam.jpg" alt="Batik">
+        <h3>Kaos Hitam</h3>
+        <p>Rp 100.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Kaos Hitam', 100000, 'kaos hitam.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Kaos Hitam', 100000, 'kaos hitam.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+      <div class="produk-card">
+        <img src="kaos putih.jpg" alt="Batik">
+        <h3>Kaos Putih</h3>
+        <p>Rp 100.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Kaos Putih', 100000, 'kaos putih.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Kaos Putih', 100000, 'kaos putih.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+      <div class="produk-card">
+        <img src="polo hitam.jpg" alt="Batik">
+        <h3>Polo Hitam</h3>
+        <p>Rp 150.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Polo Hitam', 150000, 'polo hitam.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Polo Hitam', 150000, 'polo hitam.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+      <div class="produk-card">
+        <img src="polo merah.jpg" alt="Batik">
+        <h3>Polo Merah</h3>
+        <p>Rp 150.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Polo Merah', 150000, 'polo merah.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Polo Merah', 150000, 'polo merah.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+      <div class="produk-card">
+        <img src="polo putih.jpg" alt="Batik">
+        <h3>Polo Putih</h3>
+        <p>Rp 150.000</p>
+        <div class="produk-buttons">
+          <button class="btn-cart" onclick="tambahKeKeranjang('Polo Putih', 150000, 'polo putih.jpg')">Masukkan Keranjang</button>
+          <button class="btn-pesan" onclick="pesanSekarang('Polo Putih', 150000, 'polo putih.jpg')">Pesan Sekarang</button>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <script>
+    // Menampilkan nama user di Home
+    const nama = localStorage.getItem('namaUser');
+    if (nama) document.getElementById('username').textContent = nama;
+
+    // Fungsi tambah ke keranjang
+    function tambahKeKeranjang(nama, harga, gambar) {
+      let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+      keranjang.push({ nama, harga, gambar, jumlah: 1 });
+      localStorage.setItem('keranjang', JSON.stringify(keranjang));
+      alert(nama + ' berhasil dimasukkan ke keranjang 🛒');
+    }
+
+    // Fungsi pesan sekarang
+    function pesanSekarang(nama, harga, gambar) {
+      const produk = [{ nama, harga, gambar, jumlah: 1 }];
+      localStorage.setItem('produkDipesan', JSON.stringify(produk));
+      window.location.href = 'order.html';
+    }
+  </script>
+
+</body>
+</html>

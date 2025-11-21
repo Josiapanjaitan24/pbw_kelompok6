@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClozUp | Daftar Akun</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+  <div class="login-container">
+    <h1 class="logo">ClozUp</h1>
+    <h2 class="login-title">Buat Akun Baru</h2>
+
+    <form class="login-form" onsubmit="return registerUser(event)">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Masukkan email anda" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Masukkan password anda" required>
+
+      <label for="confirm">Konfirmasi Password</label>
+      <input type="password" id="confirm" placeholder="Ulangi password anda" required>
+
+      <button type="submit" class="btn-login">Daftar</button>
+    </form>
+
+    <div class="login-footer">
+      <a href="login.html" class="create-account">Sudah punya akun?</a>
+    </div>
+  </div>
+
+  <script>
+    function registerUser(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirm = document.getElementById('confirm').value.trim();
+
+      if (password !== confirm) {
+        alert("Password dan konfirmasi tidak sama!");
+        return;
+      }
+
+      // Kirim data ke register.php
+      fetch("register.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+      })
+      .then(res => res.text())
+      .then(result => {
+        if (result.trim() === "success") {
+          alert("Registrasi berhasil! Silakan login.");
+          window.location.href = "login.html";
+        } else {
+          alert(result);
+        }
+      })
+      .catch(err => alert("Terjadi kesalahan koneksi: " + err));
+    }
+  </script>
+
+</body>
+</html>
