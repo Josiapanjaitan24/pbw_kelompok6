@@ -32,8 +32,14 @@ $stmt = $conn->prepare("INSERT INTO orders (nama_lengkap, alamat_lengkap, nomor_
 $stmt->bind_param("ssssss", $nama, $alamat, $telepon, $produk_dipesan, $ukuran, $pembayaran);
 $stmt->execute();
 
+// ... kode PHP di atas ...
+
 $stmt->close();
 $conn->close();
 
-echo "<script>alert('Pesanan kamu berhasil disimpan! 🎉'); window.location.href='home.html';</script>";
+echo "<script>
+    alert('Pesanan kamu berhasil disimpan! 🎉');
+    // Ganti jalur ini menjadi yang benar:
+    window.location.href = '../front-end/home.html'; 
+</script>";
 ?>

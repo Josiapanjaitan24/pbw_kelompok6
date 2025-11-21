@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ClozUp | Form Pemesanan</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../src/css/style.css" />
 </head>
 <body class="order-page">
   <nav class="navbar">
@@ -24,7 +24,7 @@
     <!-- Produk yang dipesan -->
     <div id="produk-dipesan-container" class="produk-ringkas-list"></div>
 
-    <form id="form-pemesanan" method="POST" action="simpan_pesanan.php">
+    <form id="form-pemesanan" method="POST" action="../back-end/simpan_pesanan.php">
       <input type="hidden" name="produk_dipesan" id="produk_dipesan_input">
       <label>Nama Lengkap</label>
       <input type="text" name="nama_lengkap" placeholder="Masukkan nama kamu" required />

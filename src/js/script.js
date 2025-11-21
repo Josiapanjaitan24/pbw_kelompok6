@@ -11,3 +11,4 @@ function pesanSekarang(nama, harga, gambar) {
   localStorage.setItem('produk_dipesan', JSON.stringify({ nama, harga, gambar }));
   window.location.href = 'order.html';
 }
+
