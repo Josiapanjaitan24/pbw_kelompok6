@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Produk</title>
+  <link rel="stylesheet" href="../src/css/style.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="home.html">ClozUp</a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="order.html">Pesanan</a></li>
+      <li><a href="keranjang.html">🛒</a></li>
+    </ul>
+  </nav>
+
+  <div class="detail-page">
+
+    <!-- KIRI -->
+    <div class="detail-left">
+      <img id="detail-gambar" src="" alt="Gambar Produk">
+    </div>
+
+    <!-- TENGAH -->
+    <div class="detail-center">
+      <h2 id="detail-nama"></h2>
+      <p class="detail-price" id="detail-harga"></p>
+      <p id="detail-deskripsi"></p>
+    </div>
+
+    <!-- KANAN -->
+    <div class="checkout-card">
+
+      <div class="checkout-top">
+        <img id="checkout-gambar" src="" alt="">
+        <div>
+          <h4 id="checkout-nama"></h4>
+          <p id="checkout-harga"></p>
+        </div>
+      </div>
+
+      <div class="quantity">
+        <button id="qtyMinus">−</button>
+        <span id="qtyValue">1</span>
+        <button id="qtyPlus">+</button>
+      </div>
+
+      <div class="subtotal">
+        Subtotal: <span id="subtotalHarga"></span>
+      </div>
+
+      <button class="btn-green" id="btnPesan">Pesan Sekarang</button>
+      <button class="btn-outline" id="btnKeranjang">Masukkan Keranjang</button>
+
+    </div>
+
+  </div>
+
+  <!-- Script produkList -->
+  <script src="../src/js/script.js"></script>
+
+  <!-- Script Detail -->
+  <script src="../src/js/detail.js"></script>
+
+</body>
+</html>
