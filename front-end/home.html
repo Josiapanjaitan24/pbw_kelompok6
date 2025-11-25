@@ -14,9 +14,19 @@
     <ul class="nav-links">
       <li><a href="#home" class="active">Home</a></li>
       <li><a href="#produk">Produk</a></li>
-      <li><a href="keranjang.html">Keranjang</a></li>
       <li><a href="order.html">Pesanan</a></li>
-      <li><a href="login.html" class="logout-btn">Logout</a></li>
+      <li><a href="keranjang.html">🛒</a></li>
+      <li>
+  <div class="user-menu">
+    <div class="user-icon" onclick="toggleUserDropdown()">👤</div>
+
+    <div class="user-dropdown" id="userDropdown">
+      <a href="../back-end/akun.php">Akun Saya</a>
+      <a href="../back-end/pesanan_saya.php">Pesanan Saya</a>
+      <a href="../back-end/logout.php">Log Out</a>
+    </div>
+  </div>
+</li>
     </ul>
   </nav>
 
@@ -24,142 +34,177 @@
   <section id="home" class="home-section">
     <div class="overlay"></div>
     <div class="home-content">
-      <h1>Selamat Datang di ClozUp 👋</h1>
-      <p>Hai, <span id="username">User!</span></p>
+      <h1>Selamat Datang di ClozUp</h1>
+      <p>Temukan Gaya Terbaikmu Disini!</p>
       <a href="#produk" class="btn-utama">Lihat Produk</a>
     </div>
   </section>
 
   <!-- Produk Section -->
   <section id="produk" class="produk-section">
-    <h2>Produk Pilihan</h2>
-    <p>Produk terbaik untuk gaya terbaikmu ✨</p>
+    <h2>Daftar Produk</h2>
+    <p>Klik produk yang kamu suka untuk melihat detail produk</p>
 
     <div class="produk-container">
-      <div class="produk-card">
-        <img src="../src/img/kemeja navy.jpg" alt="Kemeja Navy">
-        <h3>Kemeja Navy</h3>
-        <p>Rp 180.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Kemeja Navy', 180000, '../src/img/kemeja navy.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Kemeja Navy', 180000, '../src/img/kemeja navy.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
 
-      <div class="produk-card">
-        <img src="../src/img/flanel.jpg" alt="Kemeja Flanel">
-        <h3>Kemeja Flanel</h3>
-        <p>Rp 150.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Kemeja Flanel', 150000, '../src/img/flanel.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Kemeja Flanel', 150000, '../src/img/flanel.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
+<!-- Produk 1 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=1'">
+  <img src="../src/img/kemeja navy.jpg" alt="Kemeja Navy">
+  <h3>Kemeja Navy</h3>
+  <p>Rp 180.000</p>
 
-      <div class="produk-card">
-        <img src="../src/img/batik.jpg" alt="Batik">
-        <h3>Batik</h3>
-        <p>Rp 175.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Batik', 175000, '../src/img/batik.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Batik', 175000, '../src/img/batik.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
+  <div class="produk-buttons">
+    <button class="btn-cart"
+      onclick="event.stopPropagation(); tambahKeKeranjang('Kemeja Navy', 180000, '../src/img/kemeja navy.jpg')">
+      +Keranjang   
+    </button>
 
-      <div class="produk-card">
-        <img src="../src/img/blazer.jpg" alt="Batik">
-        <h3>Blazer</h3>
-        <p>Rp 200.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Blazer', 200000, '../src/img/blazer.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Blazer', 200000, '../src/img/blazer.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
+    <button class="btn-pesan"
+      onclick="event.stopPropagation(); pesanSekarang('Kemeja Navy', 180000, '../src/img/kemeja navy.jpg')">
+      Beli Langsung
+    </button>
+  </div>
+</div>
 
-      <div class="produk-card">
-        <img src="../src/img/kemeja hitam.jpg" alt="Batik">
-        <h3>Kemeja Hitam</h3>
-        <p>Rp 150.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Kemeja Hitam', 150000, '../src/img/kemeja hitam.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Kemeja Hitam', 150000, '../src/img/kemeja hitam.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
+<!-- Produk 2 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=2'">
+  <img src="../src/img/flanel.jpg" alt="Kemeja Flanel">
+  <h3>Kemeja Flanel</h3>
+  <p>Rp 150.000</p>
+  <div class="produk-buttons">
+    <button class="btn-cart" onclick="event.stopPropagation(); tambahKeKeranjang('Kemeja Flanel', 150000, '../src/img/flanel.jpg')">+Keranjang</button>
+    <button class="btn-pesan" onclick="event.stopPropagation(); pesanSekarang('Kemeja Flanel', 150000, '../src/img/flanel.jpg')">Beli Langsung</button>
+  </div>
+</div>
 
-      <div class="produk-card">
-        <img src="../src/img/kaos hitam.jpg" alt="Batik">
-        <h3>Kaos Hitam</h3>
-        <p>Rp 100.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Kaos Hitam', 100000, '../src/img/kaos hitam.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Kaos Hitam', 100000, '../src/img/kaos hitam.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
+<!-- Produk 3 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=3'">
+  <img src="../src/img/batik.jpg" alt="Batik">
+  <h3>Batik</h3>
+  <p>Rp 175.000</p>
+  <div class="produk-buttons">
+    <button class="btn-cart" onclick="event.stopPropagation(); tambahKeKeranjang('Batik', 175000, '../src/img/batik.jpg')">+Keranjang</button>
+    <button class="btn-pesan" onclick="event.stopPropagation(); pesanSekarang('Batik', 175000, '../src/img/batik.jpg')">Beli Langsung</button>
+  </div>
+</div>
 
-      <div class="produk-card">
-        <img src="../src/img/kaos putih.jpg" alt="Batik">
-        <h3>Kaos Putih</h3>
-        <p>Rp 100.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Kaos Putih', 100000, '../src/img/kaos putih.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Kaos Putih', 100000, '../src/img/kaos putih.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
+<!-- Produk 4 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=4'">
+  <img src="../src/img/blazer.jpg" alt="Blazer">
+  <h3>Blazer</h3>
+  <p>Rp 200.000</p>
+  <div class="produk-buttons">
+    <button class="btn-cart" onclick="event.stopPropagation(); tambahKeKeranjang('Blazer', 200000, '../src/img/blazer.jpg')">+Keranjang</button>
+    <button class="btn-pesan" onclick="event.stopPropagation(); pesanSekarang('Blazer', 200000, '../src/img/blazer.jpg')">Beli Langsung</button>
+  </div>
+</div>
 
-      <div class="produk-card">
-        <img src="../src/img/polo hitam.jpg" alt="Batik">
-        <h3>Polo Hitam</h3>
-        <p>Rp 150.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Polo Hitam', 150000, '../src/img/polo hitam.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Polo Hitam', 150000, '../src/img/polo hitam.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
+<!-- Produk 5 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=5'">
+  <img src="../src/img/kemeja hitam.jpg" alt="Kemeja Hitam">
+  <h3>Kemeja Hitam</h3>
+  <p>Rp 150.000</p>
+  <div class="produk-buttons">
+    <button class="btn-cart" onclick="event.stopPropagation(); tambahKeKeranjang('Kemeja Hitam', 150000, '../src/img/kemeja hitam.jpg')">+Keranjang</button>
+    <button class="btn-pesan" onclick="event.stopPropagation(); pesanSekarang('Kemeja Hitam', 150000, '../src/img/kemeja hitam.jpg')">Beli Langsung</button>
+  </div>
+</div>
 
-      <div class="produk-card">
-        <img src="../src/img/polo merah.jpg" alt="Batik">
-        <h3>Polo Merah</h3>
-        <p>Rp 150.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Polo Merah', 150000, '../src/img/polo merah.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Polo Merah', 150000, '../src/img/polo merah.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
+<!-- Produk 6 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=6'">
+  <img src="../src/img/kaos hitam.jpg" alt="Kaos Hitam">
+  <h3>Kaos Hitam</h3>
+  <p>Rp 100.000</p>
+  <div class="produk-buttons">
+    <button class="btn-cart" onclick="event.stopPropagation(); tambahKeKeranjang('Kaos Hitam', 100000, '../src/img/kaos hitam.jpg')">+Keranjang</button>
+    <button class="btn-pesan" onclick="event.stopPropagation(); pesanSekarang('Kaos Hitam', 100000, '../src/img/kaos hitam.jpg')">Beli Langsung</button>
+  </div>
+</div>
 
-      <div class="produk-card">
-        <img src="../src/img/polo putih.jpg" alt="Batik">
-        <h3>Polo Putih</h3>
-        <p>Rp 150.000</p>
-        <div class="produk-buttons">
-          <button class="btn-cart" onclick="tambahKeKeranjang('Polo Putih', 150000, '../src/img/polo putih.jpg')">Masukkan Keranjang</button>
-          <button class="btn-pesan" onclick="pesanSekarang('Polo Putih', 150000, '../src/img/polo putih.jpg')">Pesan Sekarang</button>
-        </div>
-      </div>
+<!-- Produk 7 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=7'">
+  <img src="../src/img/kaos putih.jpg" alt="Kaos Putih">
+  <h3>Kaos Putih</h3>
+  <p>Rp 100.000</p>
+  <div class="produk-buttons">
+    <button class="btn-cart" onclick="event.stopPropagation(); tambahKeKeranjang('Kaos Putih', 100000, '../src/img/kaos putih.jpg')">+Keranjang</button>
+    <button class="btn-pesan" onclick="event.stopPropagation(); pesanSekarang('Kaos Putih', 100000, '../src/img/kaos putih.jpg')">Beli Langsung</button>
+  </div>
+</div>
 
+<!-- Produk 8 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=8'">
+  <img src="../src/img/polo hitam.jpg" alt="Polo Hitam">
+  <h3>Polo Hitam</h3>
+  <p>Rp 150.000</p>
+  <div class="produk-buttons">
+    <button class="btn-cart" onclick="event.stopPropagation(); tambahKeKeranjang('Polo Hitam', 150000, '../src/img/polo hitam.jpg')">+Keranjang</button>
+    <button class="btn-pesan" onclick="event.stopPropagation(); pesanSekarang('Polo Hitam', 150000, '../src/img/polo hitam.jpg')">Beli Langsung</button>
+  </div>
+</div>
 
-    </div>
+<!-- Produk 9 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=9'">
+  <img src="../src/img/polo merah.jpg" alt="Polo Merah">
+  <h3>Polo Merah</h3>
+  <p>Rp 150.000</p>
+  <div class="produk-buttons">
+    <button class="btn-cart" onclick="event.stopPropagation(); tambahKeKeranjang('Polo Merah', 150000, '../src/img/polo merah.jpg')">+Keranjang</button>
+    <button class="btn-pesan" onclick="event.stopPropagation(); pesanSekarang('Polo Merah', 150000, '../src/img/polo merah.jpg')">Beli Langsung</button>
+  </div>
+</div>
+
+<!-- Produk 10 -->
+<div class="produk-card" onclick="window.location.href='detail.html?id=10'">
+  <img src="../src/img/polo putih.jpg" alt="Polo Putih">
+  <h3>Polo Putih</h3>
+  <p>Rp 150.000</p>
+  <div class="produk-buttons">
+    <button class="btn-cart" onclick="event.stopPropagation(); tambahKeKeranjang('Polo Putih', 150000, '../src/img/polo putih.jpg')">+Keranjang</button>
+    <button class="btn-pesan" onclick="event.stopPropagation(); pesanSekarang('Polo Putih', 150000, '../src/img/polo putih.jpg')">Beli Langsung</button>
+  </div>
+</div>
+
+  </div>
   </section>
 
   <script>
-    // Menampilkan nama user di Home
-    const nama = localStorage.getItem('namaUser');
-    if (nama) document.getElementById('username').textContent = nama;
+  // Menampilkan nama user di Home
+  const nama = localStorage.getItem('namaUser');
+  if (nama) document.getElementById('username').textContent = nama;
 
-    // Fungsi tambah ke keranjang
-    function tambahKeKeranjang(nama, harga, gambar) {
-      let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
-      keranjang.push({ nama, harga, gambar, jumlah: 1 });
-      localStorage.setItem('keranjang', JSON.stringify(keranjang));
-      alert(nama + ' berhasil dimasukkan ke keranjang 🛒');
-    }
+  // Fungsi tambah ke keranjang
+  function tambahKeKeranjang(nama, harga, gambar) {
+    let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
 
-    // Fungsi pesan sekarang
-    function pesanSekarang(nama, harga, gambar) {
-      const produk = [{ nama, harga, gambar, jumlah: 1 }];
-      localStorage.setItem('produkDipesan', JSON.stringify(produk));
-      window.location.href = 'order.html';
-    }
-  </script>
+    keranjang.push({ 
+      nama: nama, 
+      harga: harga, 
+      gambar: gambar, 
+      jumlah: 1 
+    });
+
+    localStorage.setItem('keranjang', JSON.stringify(keranjang));
+    alert(nama + ' berhasil dimasukkan ke keranjang 🛒');
+  }
+
+  // Fungsi pesan sekarang
+  function pesanSekarang(nama, harga, gambar) {
+    const produk = [{
+      nama: nama,
+      harga: harga,
+      gambar: gambar,
+      jumlah: 1
+    }];
+
+    localStorage.setItem('produkDipesan', JSON.stringify(produk));
+    window.location.href = 'order.html';
+  }
+
+</script>
+
+<script src="../src/js/script.js"></script>
+
 
 </body>
 </html>

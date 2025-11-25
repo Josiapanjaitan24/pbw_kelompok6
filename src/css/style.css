@@ -199,108 +199,323 @@ body.login-page {
 }
 
 
-/* =========================
-   UPDATE PRODUK CARD (Versi Baru & Proporsional)
-========================= */
+/* ==============================
+   PRODUK SECTION 
+============================== */
+.produk-section {
+  background: linear-gradient(180deg, #0f0f0f, #1a1a1a); /* gelap */
+  padding: 60px 40px;
+  color: #f5f5f5; /* teks putih */
+}
+
+.produk-section > h2 {
+  color: #ffffff !important;
+}
+
+.produk-section > p {
+  color: #ffffff !important;
+}
+
+/* Container card */
 .produk-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 35px;
   justify-content: center;
-  padding: 60px 40px;
 }
 
+/* Card produk */
 .produk-card {
-  background: #fff;
+  background: rgba(30, 30, 30, 0.95); /* gelap transparan */
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  color: #f5f5f5;
 }
 
 .produk-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
 }
 
+/* Gambar produk */
 .produk-card img {
   width: 100%;
-  height: 180px; /* dikurangi agar proporsional */
+  height: 180px;
   object-fit: contain;
-  background-color: #f7f7f7;
+  background-color: rgba(40, 40, 40, 0.9);
   padding: 10px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #555;
 }
 
+/* Judul dan harga */
 .produk-card h3 {
-  margin-top: 12px;
+  margin: 8px 0 4px 0; 
   font-size: 1.05em;
-  color: #222;
+  color: #ffffff !important;
   font-weight: 600;
 }
 
 .produk-card p {
-  color: #555;
+  color: #ffffff !important;
   font-size: 0.95em;
-  margin-bottom: 15px;
+  margin: 0 0 8px 0; 
 }
 
+/* Container tombol */
 .produk-buttons {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 15px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* jarak antar tombol sedikit lebih rapat */
+  margin-bottom: 8px; /* optional: memberi ruang bawah card */
 }
 
-.btn-cart,
-.btn-pesan {
-  flex: 1;
-  max-width: 120px;
-  border: none;
-  padding: 8px 0;
-  border-radius: 20px;
-  font-weight: 500;
-  font-size: 0.9em;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
+/* Tombol Masukkan Keranjang */
 .btn-cart {
-  background: #ffcc00;
+  width: 180%;
+  padding: 12px 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffcc00, #ffd633);
   color: #1a1a1a;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 204, 0, 0.4);
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
 .btn-cart:hover {
-  background: #e6b800;
+  background: linear-gradient(135deg, #ffd633, #ffcc00);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(255, 204, 0, 0.6);
 }
 
+/* Tombol Pesan Sekarang */
 .btn-pesan {
-  background: #1a1a1a;
-  color: #fff;
+  width: 180%;
+  padding: 12px 0;
+  border-radius: 12px;
+  background: transparent;
+  border: 2px solid #ffcc00;
+  color: #ffcc00;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+/* Efek overlay hover */
+.btn-pesan::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,204,0,0.15);
+  transition: 0.3s ease;
+}
+
+.btn-pesan:hover::before {
+  left: 0;
 }
 
 .btn-pesan:hover {
+  color: #1a1a1a;
+  border-color: #ffd633;
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ================================ */
+/*          DETAIL PRODUK           */
+/* ================================ */
+
+.detail-page {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 0.9fr;
+  gap: 30px;
+  padding: 120px 8%;
+  background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
+  min-height: 100vh;
+  color: #f5f5f5; /* Biar teks default putih */
+}
+
+/* ================================ */
+/*          KIRI — GAMBAR           */
+/* ================================ */
+
+.detail-left img {
+  width: 100%;
+  border-radius: 14px;
+  background: rgba(40, 40, 40, 0.9);
+  padding: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* ================================ */
+/*       TENGAH — INFORMASI         */
+/* ================================ */
+
+.detail-center h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.detail-center .detail-price {
+  font-size: 26px;
+  color: #ffcc00;
+  margin-top: 12px;
+  font-weight: 700;
+}
+
+.detail-center p {
+  margin-top: 15px;
+  line-height: 1.7;
+  color: #cfcfcf;
+  font-size: 15px;
+}
+
+/* ================================ */
+/*       KANAN — CHECKOUT BOX       */
+/* ================================ */
+
+.checkout-card {
+  background: rgba(30, 30, 30, 0.95);
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  color: white;
+}
+
+/* Produk kecil */
+.checkout-top {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.checkout-top img {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Quantity */
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.quantity button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #555; /* Elegan */
+  background: #222;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.quantity button:hover {
   background: #333;
 }
 
+.quantity span {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+/* Subtotal */
+.subtotal {
+  margin-top: 18px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffcc00;
+}
+
+/* Buttons */
+.btn-green {
+  width: 100%;
+  padding: 13px;
+  color: #1a1a1a;
+  background: #ffcc00;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.btn-green:hover {
+  background: #e6b800;
+}
+
+.btn-outline {
+  width: 100%;
+  padding: 13px;
+  border: 2px solid #ffcc00;
+  background: transparent;
+  color: #ffcc00;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.25s;
+}
+
+.btn-outline:hover {
+  background: rgba(255,204,0,0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .detail-page {
+    grid-template-columns: 1fr;
+    padding: 100px 20px;
+  }
+  .checkout-card {
+    max-width: 420px;
+    margin: auto;
+  }
+}
+
 /* ========================= */
-/* 🔹 STYLE UNTUK KERANJANG */
+/* 🔹 KERANJANG - DARK THEME */
 /* ========================= */
+
 .keranjang-section {
   padding: 120px 8%;
-  background-color: #f9f9f9;
+  background: linear-gradient(180deg, #0f0f0f, #1a1a1a); /* gelap seperti produk */
   min-height: 100vh;
+  color: #f5f5f5;
 }
 
 .keranjang-section h1 {
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 30px;
-  color: #333;
+  margin-bottom: 40px;
+  color: #ffffff; /* putih agar kontras */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
 .cart-container {
@@ -311,105 +526,31 @@ body.login-page {
   margin: 0 auto;
 }
 
+/* Card item */
 .cart-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
+  background: rgba(30, 30, 30, 0.95); /* gelap transparan */
   padding: 15px 20px;
   border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #f5f5f5;
+  gap: 15px;
 }
 
 .cart-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
 }
 
 .cart-item img {
   width: 90px;      
   height: 90px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-right: 15px;
-}
-
-.cart-item div {
-  flex: 1;
-  padding-left: 10px;
-}
-
-.cart-item h3 {
-  font-size: 1.1rem;
-  color: #222;
-  margin-bottom: 5px;
-}
-
-.cart-item p {
-  color: #555;
-  font-weight: 500;
-}
-
-.btn-hapus {
-  background-color: #ff5c5c;
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-hapus:hover {
-  background-color: #e64545;
-}
-
-/* Total dan Tombol Pesan */
-.total-section {
-  max-width: 800px;
-  margin: 40px auto 0;
-  background: #fff;
-  border-radius: 15px;
-  padding: 20px 25px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.total-section h3 {
-  font-size: 1.3rem;
-  color: #222;
-  margin-bottom: 20px;
-}
-
-.btn-pesan {
-  background-color: #222;
-  color: white;
-  padding: 12px 30px;
-  border-radius: 10px;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.btn-pesan:hover {
-  background-color: #333;
-}
-
-/* ====================================== */
-/* 🔹 STYLE TAMBAHAN UNTUK FITUR JUMLAH  */
-/* ====================================== */
-
-.cart-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  justify-content: space-between;
-  background: #fff;
-  padding: 15px 20px;
-  border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: rgba(40,40,40,0.9);
 }
 
 .cart-item input[type="checkbox"] {
@@ -417,48 +558,121 @@ body.login-page {
   cursor: pointer;
 }
 
+/* Info produk */
 .cart-info {
   flex: 1;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
+.cart-info h3 {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.cart-info p {
+  color: #cfcfcf;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Quantity controls */
 .quantity-controls {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .quantity-controls button {
-  background-color: #222;
-  color: white;
+  background: #222;
+  color: #fff;
   border: none;
-  padding: 5px 10px;
-  border-radius: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
 .quantity-controls button:hover {
-  background-color: #333;
+  background: #333;
 }
 
 .quantity-controls span {
   font-weight: 600;
-  min-width: 20px;
+  min-width: 22px;
   text-align: center;
 }
 
+/* Subtotal */
 .subtotal {
   font-weight: bold;
-  color: #333;
+  color: #ffcc00; 
   min-width: 110px;
   text-align: right;
+  margin-right: 10px;
 }
 
+/* Tombol Hapus */
+.btn-hapus {
+  background: #ff5c5c;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+.btn-hapus:hover {
+  background: #e64545;
+}
+
+/* Total dan tombol pesan */
+.total-section {
+  max-width: 800px;
+  margin: 40px auto 0;
+  background: rgba(30,30,30,0.95);
+  border-radius: 15px;
+  padding: 20px 25px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  color: #f5f5f5;
+}
+
+.total-section h3 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.total-section .btn-pesan {
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffcc00, #ffd633);
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 204, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.total-section .btn-pesan:hover {
+  background: linear-gradient(135deg, #ffd633, #ffcc00);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(255, 204, 0, 0.6);
+}
 
 /* =========================
-   PESANAN PAGE (Desain Baru)
+   PESANAN PAGE 
 ========================= */
 .order-page {
   background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
@@ -668,4 +882,40 @@ body.login-page {
   text-align: center !important;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* ===== User Dropdown ===== */
+.user-menu {
+  position: relative;
+}
+
+.user-icon {
+  font-size: 22px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: #1a1a1a;
+  width: 160px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  padding: 10px 0;
+  display: none;
+  z-index: 9999;
+}
+
+.user-dropdown a {
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.user-dropdown a:hover {
+  background: #333;
 }
