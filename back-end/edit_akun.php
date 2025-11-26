@@ -2,7 +2,6 @@
 session_start();
 include "../back-end/koneksi.php";
 
-// Jika user belum login, redirect ke login
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../front-end/login.html");
     exit;
@@ -10,21 +9,19 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Ambil data user dari database
 $query = mysqli_query($conn, "SELECT * FROM users WHERE id='$user_id'");
 $user = mysqli_fetch_assoc($query);
 
-// Jika data kosong (misalnya username / foto)
-$username = $user['nama_lengkap'] ?? "(Belum diisi)";
-$email    = $user['email'];
-$foto     = $user['foto'] ?? "default.png"; 
+$nama = $user['nama_lengkap'];
+$email = $user['email'];
+$foto = $user['foto'] ?? "default.png";
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Akun Saya</title>
+    <title>Edit Profil</title>
     <style>
         body {
             background-color: #1f1f1f;
@@ -33,13 +30,6 @@ $foto     = $user['foto'] ?? "default.png";
             margin: 0;
             padding: 0;
         }
-
-        h2 {
-            text-align: center;
-            padding: 30px 0 10px 0;
-            font-size: 2em;
-        }
-
         .container {
             max-width: 600px;
             margin: 40px auto;
@@ -47,43 +37,49 @@ $foto     = $user['foto'] ?? "default.png";
             background-color: #2c2c2c;
             border-radius: 12px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-            text-align: center;
         }
-
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
         .profile-img {
+            display: block;
+            margin: 0 auto 20px;
             width: 140px;
             height: 140px;
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid #444;
-            margin-bottom: 20px;
         }
-
-        .info p {
-            background-color: #3a3a3a;
-            padding: 12px 15px;
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
             border-radius: 8px;
-            margin: 10px 0;
-            font-size: 1em;
-            text-align: left;
+            border: none;
+            background-color: #3a3a3a;
+            color: white;
         }
-
         .btn {
             display: inline-block;
-            padding: 12px 25px;
-            color: white;
+            margin-top: 20px;
+            padding: 12px 20px;
             text-decoration: none;
             font-weight: bold;
             border-radius: 8px;
-            margin-top: 20px;
+            cursor: pointer;
         }
-
-        .edit-btn {
-            background-color: #4a90e2;
+        .save-btn {
+            background-color: #4caf50;
+            color: white;
         }
-
-        .logout-btn {
+        .cancel-btn {
             background-color: #ff4b5c;
+            color: white;
             margin-left: 10px;
         }
     </style>
@@ -91,17 +87,23 @@ $foto     = $user['foto'] ?? "default.png";
 <body>
 
 <div class="container">
-    <h2>Profil Akun</h2>
+    <h2>Edit Profil</h2>
 
     <img src="../uploads/<?= $foto ?>" class="profile-img">
 
-    <div class="info">
-        <p><strong>Nama Pengguna:</strong> <?= $username ?></p>
-        <p><strong>Email:</strong> <?= $email ?></p>
-    </div>
+    <form action="update_akun.php" method="POST" enctype="multipart/form-data">
+        <label>Nama Lengkap</label>
+        <input type="text" name="nama_lengkap" value="<?= $nama ?>" required>
 
-    <a href="edit_akun.php" class="btn edit-btn">Edit Profil</a>
-    <a href="../back-end/logout.php" class="btn logout-btn">Log Out</a>
+        <label>Email (tidak bisa diubah)</label>
+        <input type="text" value="<?= $email ?>" disabled>
+
+        <label>Foto Profil (opsional)</label>
+        <input type="file" name="foto">
+
+        <button type="submit" class="btn save-btn">Simpan Perubahan</button>
+        <a href="akun.php" class="btn cancel-btn">Batal</a>
+    </form>
 </div>
 
 </body>

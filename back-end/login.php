@@ -20,10 +20,16 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
+
     $user = $result->fetch_assoc();
 
+    // === FIX: Jika username kosong di DB ===
+    if (empty($user['username'])) {
+        $user['username'] = explode("@", $user['email'])[0];
+    }
+
     if (password_verify($password, $user['password'])) {
-        // Simpan session
+
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['email'] = $user['email'];
