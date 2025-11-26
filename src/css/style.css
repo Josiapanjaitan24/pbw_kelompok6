@@ -387,6 +387,21 @@ body.login-page {
   font-size: 15px;
 }
 
+/* Spesifikasi produk (detail) */
+#detail-spesifikasi {
+  list-style: disc;
+  margin-left: 18px;
+  padding-left: 6px;
+  color: #cfcfcf;
+  margin-top: 10px;
+}
+
+#detail-spesifikasi li {
+  margin-bottom: 6px;
+  color: #cfcfcf;
+  font-size: 14px;
+}
+
 /* ================================ */
 /*       KANAN — CHECKOUT BOX       */
 /* ================================ */
