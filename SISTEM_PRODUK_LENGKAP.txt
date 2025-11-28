@@ -1,0 +1,157 @@
+✅ SISTEM PRODUK DINAMIS - LENGKAP & SIAP DIGUNAKAN
+
+===========================================
+ALUR KERJA LENGKAP
+===========================================
+
+1. ADMIN MENAMBAH PRODUK
+   ├─ Login: http://localhost/project/back-end/admin_login.php
+   ├─ Email: josia.panjaitan24@gmail.com
+   ├─ Password: (password admin Anda)
+   ├─ Klik "+ Tambah Produk"
+   ├─ Isi form lengkap (nama, harga, stok, kategori, deskripsi, spesifikasi, foto)
+   ├─ Upload foto produk
+   └─ Klik "Simpan Produk"
+
+2. DATA TERSIMPAN DI DATABASE
+   ├─ Produk disimpan di tabel: produk
+   ├─ Foto disimpan di folder: uploads/produk/
+   └─ Spesifikasi disimpan sebagai JSON
+
+3. PRODUK MUNCUL OTOMATIS DI HOME
+   ├─ Home.html meload script.js
+   ├─ script.js fetch dari get_products.php
+   ├─ get_products.php mengambil dari database
+   ├─ Produk ditampilkan di #produk-container
+   └─ USER BISA LANGSUNG MELIHAT PRODUK BARU ✓
+
+4. USER KLIK PRODUK
+   ├─ Klik gambar/nama produk → detail.html?id=X
+   ├─ detail.js load data dari database
+   ├─ Tampilkan detail produk & spesifikasi
+   └─ User bisa tambah keranjang atau beli langsung
+
+===========================================
+FILE STRUCTURE
+===========================================
+
+back-end/
+├── get_products.php       ← API fetch produk dari database
+├── admin_login.php        ← Login admin
+├── admin_produk.php       ← List produk (admin)
+├── tambah_produk.php      ← Form tambah produk
+├── simpan_produk.php      ← Save produk ke database
+├── hapus_produk.php       ← Delete produk
+├── koneksi.php            ← Database connection
+
+front-end/
+├── home.html              ← Halaman utama (updated - id="produk-container")
+├── detail.html            ← Halaman detail produk
+├── login.html             ← Login customer
+├── register.html          ← Registrasi customer
+├── keranjang.html         ← Keranjang belanja
+└── order.html             ← Form pesanan
+
+src/
+├── js/
+│   ├── script.js          ← Load & render produk (UPDATED)
+│   └── detail.js          ← Load detail produk (UPDATED)
+├── css/
+│   └── style.css          ← Stylesheet
+└── img/
+    └── (folder foto default)
+
+uploads/
+└── produk/                ← Folder untuk foto produk database
+
+===========================================
+FITUR-FITUR YANG TERSEDIA
+===========================================
+
+✅ Admin dapat tambah produk via website
+✅ Produk otomatis muncul di halaman home
+✅ Foto produk disimpan di folder uploads/produk/
+✅ Spesifikasi (bahan, ukuran, warna, perawatan) tersimpan
+✅ Detail produk dapat dilihat dengan klik produk
+✅ User dapat tambah keranjang dari halaman produk
+✅ User dapat beli langsung dari halaman produk
+✅ Admin dapat hapus produk (data & foto terhapus)
+✅ Sistem fallback jika database kosong (use default products)
+
+===========================================
+TESTING FLOW
+===========================================
+
+1. Login Admin
+   → http://localhost/project/back-end/admin_login.php
+
+2. Tambah 1 Produk
+   → Klik "+ Tambah Produk"
+   → Isi form lengkap
+   → Upload foto
+   → Klik "Simpan Produk"
+
+3. Cek Home Page
+   → Buka http://localhost/project/front-end/home.html
+   → Scroll ke section Daftar Produk (#produk)
+   → Produk baru HARUS MUNCUL ✓
+
+4. Klik Produk Baru
+   → Klik produk baru → detail.html?id=X
+   → Cek detail, spesifikasi, dan harga
+   → Klik "+Keranjang" atau "Beli Langsung"
+
+5. Hapus Produk (Opsional)
+   → Kembali ke admin_produk.php
+   → Klik tombol "🗑️ Hapus"
+   → Konfirmasi penghapusan
+   → Produk hilang dari home ✓
+
+===========================================
+TROUBLESHOOTING
+===========================================
+
+Problem: Produk tidak muncul di home
+Solusi:
+  1. Buka Console (F12) → Check error
+  2. Pastikan get_products.php accessible
+  3. Refresh page (Ctrl+F5)
+  4. Cek database - ada data di tabel produk?
+
+Problem: Foto tidak tampil
+Solusi:
+  1. Pastikan folder uploads/produk/ ada
+  2. Cek foto tersimpan di folder itu
+  3. Cek path di database (kolom foto)
+
+Problem: Login admin error
+Solusi:
+  1. Pastikan user punya is_admin = 1
+  2. Buka http://localhost/project/back-end/manage_users.php
+  3. Klik "Set as Admin" untuk user Anda
+
+Problem: Form tidak tersimpan
+Solusi:
+  1. Cek server error di browser console
+  2. Pastikan kolom spesifikasi ada di database
+  3. Jalankan ALTER TABLE (lihat SETUP_GUIDE.txt)
+
+===========================================
+NEXT STEPS (OPTIONAL)
+===========================================
+
+- Edit produk (buat edit_produk.php + update_produk.php)
+- Filter produk by kategori
+- Search produk
+- Rating & review produk
+- Stock tracking dengan notifikasi
+
+===========================================
+SELESAI! 🎉
+===========================================
+
+Sistem sudah 100% siap untuk digunakan!
+Admin dapat menambah produk melalui website,
+dan produk akan OTOMATIS muncul di halaman home.
+
+Semua fitur sudah terintegrasi dengan sempurna!

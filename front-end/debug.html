@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Detail Produk</title>
+    <style>
+        body { font-family: Arial; background: #f0f0f0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+        h1 { color: #333; }
+        .section { margin: 20px 0; padding: 10px; background: #f9f9f9; border-left: 4px solid #007bff; }
+        .test-link { 
+            display: inline-block; 
+            margin: 5px; 
+            padding: 10px 15px; 
+            background: #007bff; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px;
+        }
+        .test-link:hover { background: #0056b3; }
+        .error { color: red; }
+        .success { color: green; }
+        pre { background: #f0f0f0; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🔍 Debug Detail Produk</h1>
+    
+    <div class="section">
+        <h2>1. Test Default Products (ID 1-10)</h2>
+        <p>Klik link berikut untuk test produk default:</p>
+        <div>
+            <a href="detail.html?id=1" class="test-link">Produk ID 1</a>
+            <a href="detail.html?id=5" class="test-link">Produk ID 5</a>
+            <a href="detail.html?id=10" class="test-link">Produk ID 10</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. Check Database Products</h2>
+        <p>Data produk dari database:</p>
+        <button onclick="checkDatabase()">Load Database</button>
+        <pre id="dbOutput">Loading...</pre>
+    </div>
+
+    <div class="section">
+        <h2>3. Test Links to Database Products</h2>
+        <p id="dbLinks">Loading links...</p>
+    </div>
+
+    <div class="section">
+        <h2>4. Browser Console</h2>
+        <p>Buka F12 → Console untuk melihat debug log dari detail.js</p>
+        <p>Saat klik produk, console akan menampilkan:</p>
+        <ul>
+            <li>ID yang dicari</li>
+            <li>Produk dari database</li>
+            <li>Semua produk yang tersedia</li>
+            <li>Apakah produk ditemukan atau tidak</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+async function checkDatabase() {
+    const output = document.getElementById('dbOutput');
+    try {
+        const response = await fetch('../back-end/debug_products.php');
+        const data = await response.json();
+        output.textContent = JSON.stringify(data, null, 2);
+        
+        // Buat links ke produk database
+        if (data.data && data.data.length > 0) {
+            let links = '<p>Klik link untuk test produk dari database:</p>';
+            data.data.forEach(prod => {
+                links += `<a href="detail.html?id=${prod.id}" class="test-link">Produk ID ${prod.id} (${prod.nama})</a>`;
+            });
+            document.getElementById('dbLinks').innerHTML = links;
+        }
+    } catch (error) {
+        output.textContent = 'Error: ' + error.message;
+    }
+}
+
+// Auto-load saat halaman dibuka
+window.addEventListener('DOMContentLoaded', checkDatabase);
+</script>
+
+</body>
+</html>

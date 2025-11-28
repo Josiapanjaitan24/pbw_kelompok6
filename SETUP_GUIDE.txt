@@ -1,0 +1,92 @@
+SETUP GUIDE - ADMIN PRODUK MANAGEMENT
+
+=== STEP 1: DATABASE ===
+Jalankan SQL ini di phpMyAdmin untuk menambah kolom spesifikasi:
+
+ALTER TABLE `produk` ADD COLUMN `spesifikasi` JSON AFTER `foto`;
+
+Atau jika ingin full update table dengan struktur terbaru:
+
+DROP TABLE IF EXISTS `produk`;
+
+CREATE TABLE `produk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `stok` int(11) NOT NULL,
+  `kategori` varchar(100) DEFAULT NULL,
+  `deskripsi` text DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `spesifikasi` json DEFAULT NULL,
+  `tanggal_upload` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+=== STEP 2: SET ADMIN USER ===
+Pastikan user yang login punya is_admin = 1 di table users:
+
+UPDATE users SET is_admin = 1 WHERE id = 1;
+
+=== STEP 3: CREATE UPLOADS FOLDER ===
+Buat folder di project root:
+- c:\xampp\htdocs\project\uploads\
+- c:\xampp\htdocs\project\uploads\produk\
+
+=== STEP 4: SET ADMIN SESSION ===
+Login dengan akun admin terlebih dahulu
+
+=== STEP 5: TEST SYSTEM ===
+Buka: http://localhost/project/back-end/test_admin.php
+
+Ini akan menampilkan:
+- Status koneksi database
+- Struktur table produk
+- Status folder uploads
+- Jumlah produk saat ini
+- Link ke halaman admin
+
+=== STEP 6: GUNAKAN SISTEM ===
+1. Go to: http://localhost/project/back-end/admin_produk.php
+2. Click "+ Tambah Produk" button
+3. Isi form dengan data produk:
+   - Nama produk
+   - Harga
+   - Stok
+   - Kategori
+   - Deskripsi
+   - Spesifikasi (bahan, ukuran, warna, perawatan)
+   - Upload foto
+4. Click "Simpan Produk"
+5. Produk akan muncul di list
+
+=== TROUBLESHOOTING ===
+
+Problem: "Akses ditolak!"
+Solution: Pastikan sudah login sebagai admin dan session is_admin = 1
+
+Problem: "not found" pada redirect
+Solution: Sudah diperbaiki, check koneksi/path files
+
+Problem: "Error: Gagal membuat folder uploads"
+Solution: Buat folder manually:
+  - Right-click project folder
+  - New > Folder
+  - Buat "uploads" lalu "produk" inside
+
+Problem: "Gagal upload gambar"
+Solution: 
+  - Pastikan format JPG/PNG/GIF
+  - File size < 5MB
+  - Folder uploads/produk sudah ada dan writable
+
+=== FILE STRUCTURE ===
+back-end/
+├── admin_produk.php        (List produk)
+├── tambah_produk.php       (Form tambah)
+├── simpan_produk.php       (Backend simpan)
+├── koneksi.php            (Database connection)
+├── test_admin.php         (Diagnostic tool)
+└── login.php              (Authentication)
+
+uploads/
+└── produk/                (Tempat simpan foto)
