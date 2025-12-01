@@ -141,18 +141,19 @@ async function loadProductDetail() {
   console.log('Loading product ID:', productId);
   
   // Start dengan produk default
-  let allProducts = [...DEFAULT_PRODUCTS];
+  let allProducts = [];
+  let dbProducts = [];
   
-  // Try load dari database
+  // Try load dari database TERLEBIH DAHULU
   try {
     const response = await fetch('../back-end/get_products.php');
     if (response.ok) {
-      const dbProducts = await response.json();
-      console.log('Database products loaded:', dbProducts);
+      const data = await response.json();
+      console.log('Database products loaded:', data);
       
-      if (dbProducts && Array.isArray(dbProducts) && dbProducts.length > 0) {
+      if (data && Array.isArray(data) && data.length > 0) {
         // Format database products
-        const formatted = dbProducts.map(item => {
+        dbProducts = data.map(item => {
           let spek = item.spesifikasi;
           if (typeof spek === 'string') {
             try {
@@ -170,33 +171,43 @@ async function loadProductDetail() {
             spesifikasi: spek || { bahan: '', ukuran: '', warna: '', perawatan: '' }
           };
         });
-        
-        // Gabung
-        allProducts = [...DEFAULT_PRODUCTS, ...formatted];
-        console.log('All products (default + db):', allProducts);
-        // Debug-friendly summary table (id + name + source)
-        try {
-          const summary = allProducts.map(p => ({ id: p.id, nama: p.nama, sumber: (p.id > 10 ? 'db' : 'default') }));
-          console.group('detail-new debug');
-          console.log('Merged product count:', allProducts.length);
-          console.table(summary);
-          console.groupEnd();
-        } catch (e) {
-          console.debug('Could not print debug table', e);
-        }
+        console.log('Formatted DB products:', dbProducts);
       }
     }
   } catch (error) {
     console.error('Error fetching database products:', error);
   }
   
+  // PRIORITAS: Database products DULUAN, baru default products
+  // Ini memastikan produk baru dari database tidak ketimpa produk default
+  allProducts = [...dbProducts, ...DEFAULT_PRODUCTS];
+  
+  console.log('All products (db first + default):', allProducts);
+  console.log('Total products:', allProducts.length);
+  
+  // Debug-friendly summary table
+  try {
+    const summary = allProducts.map(p => ({ 
+      id: p.id, 
+      nama: p.nama, 
+      sumber: (dbProducts.some(db => db.id === p.id) ? 'db' : 'default') 
+    }));
+    console.group('detail-new debug');
+    console.log('Product count:', allProducts.length);
+    console.table(summary);
+    console.groupEnd();
+  } catch (e) {
+    console.debug('Could not print debug table', e);
+  }
+  
   // Cari produk
   const product = allProducts.find(p => p.id === productId);
   console.log('Product found:', product);
+  console.log('Product source:', product ? (dbProducts.some(db => db.id === product.id) ? 'DATABASE' : 'DEFAULT') : 'NOT FOUND');
   
   if (!product) {
-    document.getElementById('detail-nama').textContent = '❌ Produk tidak ditemukan';
-    console.error('Product ID ' + productId + ' not found');
+    document.getElementById('detail-nama').textContent = '❌ Produk tidak ditemukan (ID: ' + productId + ')';
+    console.error('Product ID ' + productId + ' not found in ' + allProducts.length + ' products');
     return;
   }
   

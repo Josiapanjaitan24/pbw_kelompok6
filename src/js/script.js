@@ -154,6 +154,66 @@ const defaultProdukList = [
 
 // Variable untuk menyimpan produk dari database atau default
 let produkList = [];
+let allCategories = [];
+let activeFilter = '';
+
+// Fetch kategori dari database
+async function loadKategori() {
+  try {
+    const response = await fetch('../back-end/get_categories.php');
+    const data = await response.json();
+    
+    if (data && data.length > 0) {
+      allCategories = data.map(item => item.nama_kategori);
+      renderKategoryFilter();
+    }
+  } catch (error) {
+    console.error('Error loading kategori:', error);
+  }
+}
+
+// Render kategori filter buttons
+function renderKategoryFilter() {
+  const filterContainer = document.getElementById('kategori-filter');
+  if (!filterContainer) return;
+  
+  filterContainer.style.display = 'block';
+  
+  // Clear existing buttons kecuali yang pertama
+  const buttons = filterContainer.querySelectorAll('button');
+  buttons.forEach(btn => {
+    if (btn.textContent !== 'Semua') {
+      btn.remove();
+    }
+  });
+  
+  // Tambahkan kategori buttons
+  allCategories.forEach(kategori => {
+    const btn = document.createElement('button');
+    btn.className = 'kategori-btn';
+    btn.textContent = kategori;
+    btn.onclick = () => filterProduk(kategori);
+    filterContainer.appendChild(btn);
+  });
+}
+
+// Filter produk berdasarkan kategori
+function filterProduk(kategori) {
+  activeFilter = kategori;
+  
+  // Update active button
+  const buttons = document.querySelectorAll('.kategori-btn');
+  buttons.forEach(btn => {
+    if ((kategori === '' && btn.textContent === 'Semua') || btn.textContent === kategori) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  // Render produk yang sesuai filter
+  renderProduk();
+}
 
 // Fetch produk dari database
 async function loadProduk() {
@@ -206,7 +266,18 @@ function renderProduk() {
   
   produkContainer.innerHTML = '';
   
-  produkList.forEach(produk => {
+  // Filter produk berdasarkan kategori aktif
+  let produkToDisplay = produkList;
+  if (activeFilter !== '') {
+    produkToDisplay = produkList.filter(produk => produk.kategori === activeFilter);
+  }
+  
+  if (produkToDisplay.length === 0) {
+    produkContainer.innerHTML = '<p style="text-align: center; color: #999;">Tidak ada produk dalam kategori ini</p>';
+    return;
+  }
+  
+  produkToDisplay.forEach(produk => {
     const card = document.createElement('div');
     card.className = 'produk-card';
     card.innerHTML = `
@@ -229,6 +300,7 @@ function renderProduk() {
 
 // Load produk saat halaman dimuat
 document.addEventListener('DOMContentLoaded', function() {
+  loadKategori();
   loadProduk();
 });
 

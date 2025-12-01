@@ -1,11 +1,15 @@
 <?php
 session_start();
+include "koneksi.php";
 
 // Hanya admin
 if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
     header("Location: admin_login.php");
     exit;
 }
+
+// Ambil daftar kategori dari database
+$kategori_list = mysqli_query($conn, "SELECT id, nama_kategori FROM kategori ORDER BY nama_kategori ASC");
 ?>
 
 <!DOCTYPE html>
@@ -131,7 +135,19 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
             </div>
             <div class="form-group">
                 <label for="kategori">Kategori *</label>
-                <input type="text" id="kategori" name="kategori" placeholder="Contoh: Kemeja / Celana / Jaket" required>
+                <select id="kategori" name="kategori" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <?php 
+                    if (mysqli_num_rows($kategori_list) > 0) {
+                        while ($row = mysqli_fetch_assoc($kategori_list)) {
+                            echo "<option value='" . $row['nama_kategori'] . "'>" . $row['nama_kategori'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+                <small style="color: #999; display: block; margin-top: 5px;">
+                    <a href="kelola_kategori.php" style="color: #ffcc00; text-decoration: none;">➕ Kelola Kategori</a>
+                </small>
             </div>
         </div>
 

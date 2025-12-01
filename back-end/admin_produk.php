@@ -209,6 +209,7 @@ $produk = mysqli_query($conn, "SELECT * FROM produk ORDER BY id DESC");
 <div class="admin-header">
     <h1>📦 Kelola Produk</h1>
     <div style="display: flex; gap: 10px;">
+        <a href="kelola_kategori.php" class="btn-tambah" style="background: linear-gradient(135deg, #667eea, #7b8de8); color: white;">📂 Kelola Kategori</a>
         <a href="tambah_produk.php" class="btn-tambah">+ Tambah Produk</a>
         <a href="logout.php" class="btn-logout">Logout</a>
     </div>

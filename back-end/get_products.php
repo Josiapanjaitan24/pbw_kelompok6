@@ -2,8 +2,17 @@
 header('Content-Type: application/json');
 include "koneksi.php";
 
-// Ambil semua produk dari database
-$query = "SELECT * FROM produk ORDER BY tanggal_upload DESC";
+// Ambil filter kategori jika ada
+$filter_kategori = isset($_GET['kategori']) ? trim($_GET['kategori']) : '';
+
+// Buat query dengan optional filter
+$query = "SELECT * FROM produk";
+if (!empty($filter_kategori)) {
+    $filter_kategori = mysqli_real_escape_string($conn, $filter_kategori);
+    $query .= " WHERE kategori = '$filter_kategori'";
+}
+$query .= " ORDER BY tanggal_upload DESC";
+
 $result = mysqli_query($conn, $query);
 
 $produk = array();
